@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Udemy Search</title>
+    <script src="https://unpkg.com/vue"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+
+<body>
+    <h1>Advanced Udemy Search</h1>
+
+    <div id="app">
+        <!-- Search Section -->
+        <div>
+            <span>Search: </span>
+            <input type="text" v-model="query">
+            <br>
+
+            <span>Min. Rating: </span>
+            <input type="number" v-model="min_rating" min="0" max="5" step="0.01">
+            <br>
+
+            <span>Min. Review Count: </span>
+            <input type="number" v-model="min_review_count" min="0">
+            <br>
+
+            <span>Created After: </span>
+            <input type="date" ref="datePicker" v-model="min_date" min="2018-01-01" max="2025-12-31">
+            <button id="search-btn" @click="search">Search</button>
+            <div class="loader" v-if="show_loader"></div>
+
+            <hr>
+        </div>
+
+        <!-- Search Results -->
+        <div>
+            <span v-if="courses">Courses:</span>
+            <ul v-if="courses">
+                <li v-for="course in courses">
+                    <a .href=course.url>{{course['title']}}</a> -
+                    {{course['avg_rating']}}
+                    {{course['review_count']}} ||| {{course['created']}}
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="scripts/app.js"></script>
+</body>
+
+</html>
